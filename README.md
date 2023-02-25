@@ -1,2 +1,0 @@
-# BrickHack
-For BrickHack project
