@@ -8,9 +8,12 @@ export default Tasks = (props) => {
     return (  
         <View style={styles.taskContainer}>
             <TouchableOpacity onPress={() => props.strikeoffTask()}>
-                <MaterialIcons style={styles.delete} name="panorama-fisheye" size={18} color='#fff' />
+                <MaterialIcons style={styles.strikeoff} name="panorama-fisheye" size={18} color='#fff' />
             </TouchableOpacity>
             <Text style={styles.task}>{props.task}</Text>
+            <TouchableOpacity onPress={() => props.removeTask()}>
+                <MaterialIcons style={styles.delete} name="delete" size={18} color='#fff' />
+            </TouchableOpacity>
         </View>
     );
 }
@@ -28,7 +31,17 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         minHeight: 50,
     },
-    delete: {
+    strikeoff: {
         marginLeft: 10
     },
+    task: 
+    {
+        marginLeft: 40,
+        textAlign: 'center'
+    },
+
+    delete: {
+        marginRight: 10
+    }
+
 });

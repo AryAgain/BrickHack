@@ -14,19 +14,24 @@ export default function App() {
     Keyboard.dismiss();
   }
 
-  const strikeoffTask = (strikeoffValue) => {
-    setTasks(tasks.filter((value) => value != strikeoffValue));
+
+  const strikeoffTask = (strikeoffTaskValue) => {
+    // setTasks(tasks.filter((value) => value != strikeoffTaskValue));
+  }
+
+  const removeTask = (removeTaskValue) => {
+    setTasks(tasks.filter((value) => value != removeTaskValue));
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>TODO NOW LIST</Text>
-      <ScrollView contentContainerStyle={{flexGrow:1}} style={styles.scrollView}>
+      <Text style={styles.heading}>TODO NOW LIST</Text>
+      <ScrollView style={styles.scrollView}>
         {
         tasks.map((task, index) => {
           return (
             <View key={index} style={styles.taskContainer}>
-              <Tasks task={task} strikeoffTask={() => strikeoffTask(task)}/>
+              <Tasks task={task} strikeoffTask={() => strikeoffTask(task)} removeTask={() => removeTask(task)}/>
             </View>
           );
         })
@@ -37,22 +42,24 @@ export default function App() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 80,
+    backgroundColor: '#1E1A3C',
   },
-  text: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    fontSize: 20
+  heading: {
+    color: '#f0f8ff',
+    fontSize: 35,
+    fontWeight: '600',
+    marginTop: 50,
+    marginBottom: 10,
+    textAlign: 'center'
   },
   scrollView: {
     marginBottom: 70,
-    flexGrow: 1
+  },
+  taskContainer: {
+    marginTop: 20,
   }
 });
