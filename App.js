@@ -15,9 +15,7 @@ export default function App() {
   }
 
 
-  const strikeoffTask = (strikeoffTaskValue) => {
-    // setTasks(tasks.filter((value) => value != strikeoffTaskValue));
-  }
+
 
   const removeTask = (removeTaskValue) => {
     setTasks(tasks.filter((value) => value != removeTaskValue));
@@ -31,7 +29,7 @@ export default function App() {
         tasks.map((task, index) => {
           return (
             <View key={index} style={styles.taskContainer}>
-              <Tasks task={task} strikeoffTask={() => strikeoffTask(task)} removeTask={() => removeTask(task)}/>
+              <Tasks task={task} removeTask={() => removeTask(task)}/>
             </View>
           );
         })
