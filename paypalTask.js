@@ -1,10 +1,12 @@
+require('dotenv').config();
 const router = require('express').Router();
 const paypal = require('paypal-rest-sdk')
 
+
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
-    'client_id': 'AbRGMnkMH72HjobHckk5wCNHnayWej-yy2K_naz_61IR3RojRJQPY4wGvzKj9ATn8nXFwEpE90q1ea2O',
-    'client_secret': 'EJMIjChdMzXGngDzSk9rGUUVd0tZtRRaejQF9Oc7WfTqhtagc_dN_8vNPNolK7uZczLc5KZrL3dF7p9E'
+    'client_id': process.env.PAYPAL_API_CLIENT_ID,
+    'client_secret': process.env.PAYPAL_API_SECRET_ID
   });
 
 router.post('/', (request, response) => {

@@ -1,4 +1,4 @@
-POST http://localhost:9000/api/task
+POST http://localhost:8100/api/task
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:9000/api/task
+POST http://localhost:8100/api/task
 Content-Type: application/json
 
 {
@@ -22,12 +22,24 @@ Content-Type: application/json
 
 ###
 
-GET  http://localhost:9000/api/tasks
+POST http://localhost:8100/api/task
+Content-Type: application/json
+
+{
+    "taskName" : "Money Maker",
+    "taskDescription": "Buy milk, bread, eggs, and fruits",
+    "startDate" : "2023-05-25T12:34",
+    "endDate" : "2023-05-28T12:34"
+}
+
+###
+
+GET  http://localhost:8100/api/tasks
 Content-Type: application/json
 
 ###
 
-PUT http://localhost:9000/api/task/Money
+PUT http://localhost:8100/api/task/Money
 Content-Type: application/json
 
 {
@@ -35,3 +47,36 @@ Content-Type: application/json
     "taskDescription": "Buy",
     "endDate" : "2025-05-28T12:34"
 }
+
+###
+
+DELETE  http://localhost:8100/api/task/Money Update
+Content-Type: application/json
+
+###
+
+POST http://localhost:8100/createProject
+Content-Type: application/json
+
+{
+    "projectName" : "Build An Android App"
+}
+
+###
+
+POST http://localhost:8100/createProject
+Content-Type: application/json
+
+{
+    "projectName" : "Dance like Hrithik Roshan"
+}
+
+###
+
+DELETE  http://localhost:8100/deleteProject/Build An Android App
+Content-Type: application/json
+
+###
+
+GET  http://localhost:8100/api/projects
+Content-Type: application/json
