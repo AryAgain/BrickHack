@@ -147,17 +147,34 @@ async function createProject(projectName, noOftasks=3) {
     console.log('test in cp()')
     // splitting task string into array of tasks
     console.log(taskString);
-    taskArray = taskString.split(",");
+    // taskArray = taskString.split(",");
+    taskNames = []
+    temp_string = ''
+    f=0
+    // j=0
+    for(let i = 0; i < taskString.length; i++){
+        // console.log("task array of i" +i + "- "+ taskArray[i]);
+        // temp = taskArray[i].trim().split(":");
+        // console.log("temp" +temp);
 
-    for(let i = 0; i < taskArray.length; i++){
-        console.log("task array of i" +i + "- "+ taskArray[i]);
-        temp = taskArray[i].trim().split(":");
-        console.log("temp" +temp);
+        if (taskString[i] == ':'){
+            f=1
+        }
+        if(taskString[i]==',' || taskString[i]=='.'){
+            createTask(temp_string.trim());
+            taskNames[i] = temp_string.trim();
+            temp_string=''
+            f=0
+        }
+
+        if (f==1 && taskString[i] != ':'){
+            temp_string += taskString[i];
+        }
+
         
         // temp = taskArray[i].split(":");
         // taskNames[i] = temp[1].trim();
-        createTask(temp[1]);
-        console.log(temp);
+       
     }
 
     console.log("created tasks for projects and saved to database");

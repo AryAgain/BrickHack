@@ -9,7 +9,7 @@ const openai = new OpenAIApi(configuration);
 async function runCompletion (noOftasks, task) {
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: "Divide the following project into" + noOftasks + "milestone tasks :" + task + ". Strictly give output only in following format : \"1 : task 1 , 2 : task 2, 3 : task 3  \" ",
+        prompt: "Divide the following project into" + noOftasks + "milestone tasks :" + task + ". Strictly give output only in following format : \"1 : task 1 , 2 : task 2, 3 : task 3  \" . A task not more than 5 words",
         temperature: 0.5,
         max_tokens: 64,
     });
