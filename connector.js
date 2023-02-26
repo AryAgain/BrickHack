@@ -15,10 +15,18 @@ mongoose.connect("mongodb://localhost:27017/todo", function(err){
 });
 // express server to listen to port 3000
 server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+
 server.use(cors());
 
 server.listen(3000, function () {
     console.log('Server is running..');
+});
+// express server to call createTask function
+server.post('/createTask', function (req, res) {
+    console.log('getting sent data=',req.body);
+    //createTask(req.body.taskName, req.body.taskDescription, req.body.startDate, req.body.endDate);
+    res.send('result sent');
 });
 
 // Defining task schema
@@ -34,17 +42,17 @@ const taskSchema = new mongoose.Schema({
 // Creating collection
 const tasks = mongoose.model("task", taskSchema);
 
-const task1 = new tasks({
-    taskName: "Do grocery",
-    taskDescription: "Buy milk, bread, eggs, and fruits",
-    startDate : new Date("2023-05-25T12:34"),
-    endDate : new Date("2023-05-28T12:34"),
-});
+// const task1 = new tasks({
+//     taskName: "Do grocery",
+//     taskDescription: "Buy milk, bread, eggs, and fruits",
+//     startDate : new Date("2023-05-25T12:34"),
+//     endDate : new Date("2023-05-28T12:34"),
+// });
 
-task1.save();
+// task1.save();
 
 // give console output of done
-console.log("saved to database");
+// console.log("saved to database");
 
 // function to create new task
 function createTask(taskName, taskDescription, startDate, endDate) {
@@ -59,7 +67,7 @@ function createTask(taskName, taskDescription, startDate, endDate) {
 }
 
 // call createTask function
-createTask("Get milk ", "Buy organic", new Date("2023-05-25T12:34"), new Date("2023-05-29T12:34"));
+// createTask("Get milk ", "Buy organic", new Date("2023-05-25T12:34"), new Date("2023-05-29T12:34"));
 
 
 // function to update task
