@@ -26,7 +26,9 @@ server.listen(3000, function () {
 server.post('/createTask', function (req, res) {
     console.log('getting sent data=',req.body);
     //createTask(req.body.taskName, req.body.taskDescription, req.body.startDate, req.body.endDate);
-    res.send('result sent');
+    createTask(req.body.taskName);
+        // "hi", "2023-05-25T16:34", "2023-06-25T16:34");
+    res.send('{"result":"sent"}');
 });
 
 // Defining task schema
@@ -55,7 +57,7 @@ const tasks = mongoose.model("task", taskSchema);
 // console.log("saved to database");
 
 // function to create new task
-function createTask(taskName, taskDescription, startDate, endDate) {
+function createTask(taskName, taskDescription=null, startDate=null, endDate=null) {
     const task = new tasks({
         taskName: taskName,
         taskDescription: taskDescription,

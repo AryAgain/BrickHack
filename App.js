@@ -16,7 +16,7 @@ export default function App() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ taskName: task })
-            }).then(response => response.json()).then(data => console.log('data posted') );
+            }).then(response => console.log('received'));
 
     Keyboard.dismiss();
   }
