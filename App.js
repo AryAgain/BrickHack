@@ -14,9 +14,6 @@ export default function App() {
     Keyboard.dismiss();
   }
 
-
-
-
   const removeTask = (removeTaskValue) => {
     setTasks(tasks.filter((value) => value != removeTaskValue));
   }
