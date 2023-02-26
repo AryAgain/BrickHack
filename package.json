@@ -1,37 +1,24 @@
 {
   "name": "todonow",
   "version": "1.0.0",
-  "//main_original": "node_modules/expo/AppEntry.js",
-  "main": "index.js",
-  "type": "module",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "//start_original": "expo start",
-    "//android_original": "expo start --android",
-    "//ios_original": "expo start --ios",
-    "//web_original": "expo start --web"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/webpack-config": "^18.0.1",
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
     "expo": "~48.0.4",
     "expo-status-bar": "~1.4.4",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.10.0",
-    "morgan": "^1.10.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
     "react-native": "0.71.3",
-    "react-native-web": "~0.18.10"
+    "react-dom": "18.2.0",
+    "react-native-web": "~0.18.10",
+    "@expo/webpack-config": "^18.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "eslint": "^8.34.0",
-    "nodemon": "^2.0.20"
+    "@babel/core": "^7.20.0"
   },
   "private": true
 }
