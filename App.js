@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
 import TaskEnter from './TaskEnter';
 import Tasks from './Tasks';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function App() {
 
@@ -12,7 +13,8 @@ export default function App() {
     if (task == null) return;
     // setTasks([...tasks, task]);
     
-    fetch('http://localhost:3000/createTask', {
+    // http://localhost:3000/createTask  // use  "ipconfig getifaddr en0" to find ip
+    fetch('http://129.21.66.106:3000/createTask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ taskName: task })
@@ -23,8 +25,8 @@ export default function App() {
 
   const removeTask = (removeTaskValue) => {
 
-
-    fetch('http://localhost:3000/deleteTask', {
+    // http://localhost:3000/deleteTask
+    fetch('http://129.21.66.106:3000/deleteTask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ taskName: removeTaskValue })
@@ -44,7 +46,8 @@ export default function App() {
 
   useEffect(() => {
     
-    fetch('http://localhost:3000/api/tasks', {
+    // http://localhost:3000//api/tasks
+    fetch('http://129.21.66.106:3000/api/tasks', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
       })
@@ -70,7 +73,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>TODO NOW LIST</Text>
+      <Text style={styles.heading}>Good Morning</Text>
+      <View style={styles.projectcontainer}>
+        <MaterialIcons style={styles.projecticon} name="radio-button-on" size={18} color='#fff' />
+      </View>
       <ScrollView style={styles.scrollView}>
         {
         tasks.map((task, index) => {
@@ -95,11 +101,23 @@ const styles = StyleSheet.create({
   },
   heading: {
     color: '#f0f8ff',
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: '600',
-    marginTop: 50,
+    marginTop: 60,
     marginBottom: 10,
-    textAlign: 'center'
+    marginLeft: 20,
+    textAlign: 'left'
+  },
+  projectcontainer: {
+    backgroundColor: '#1E1A3C',
+    justifyContent: 'right',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    minHeight: 10,
+  },
+  projecticon: {
+    marginRight: 10,
+    marginLeft: 340
   },
   scrollView: {
     marginBottom: 70,
