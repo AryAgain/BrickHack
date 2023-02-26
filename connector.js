@@ -45,4 +45,3 @@ createTask("Get milk ", "Buy organic", new Date("2023-05-25T12:34"), new Date("2
 // function to update task
 // findOneAndUpdate()
 //function updateTask(taskName, taskDescription, startDate, endDate) {
-
