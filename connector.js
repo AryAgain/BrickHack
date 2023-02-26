@@ -1,5 +1,25 @@
+var express = require('express');
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/todo", {useNewUrlParser: true});
+var bodyParser = require('body-parser');
+var cors = require('cors');
+
+var server = express();
+
+mongoose.connect("mongodb://localhost:27017/todo", function(err){
+    if(err){
+        console.log("Error connecting to database");
+    }else{
+        console.log("Connected to database");
+    }
+
+});
+// express server to listen to port 3000
+server.use(bodyParser.json());
+server.use(cors());
+
+server.listen(3000, function () {
+    console.log('Server is running..');
+});
 
 // Defining task schema
 const taskSchema = new mongoose.Schema({
