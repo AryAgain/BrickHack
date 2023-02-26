@@ -8,7 +8,7 @@ Been our life story too and so we built a solution which practically worked for 
 It translates mental/psychological blocks into physical aspect through real monetary values. If a person will miss a deadline, they will lose money. Hence, keeping you accountable and motivated to achieve aim on time powered by our AI model usage.
 
 ## How we built it
-We used MERN stack, taking advantage of React Native along with Expo to code once but deploy at all the platforms in once to make the app universally available for the ease of access.
+We used MERN stack, taking advantage of React Native along with Expo to code once but deploy at all the platforms in once to make the app universally available for the ease of access.  We also used artificial intelligence model to provide a feature for better reccomendations.
 
 ## Challenges we ran into
 Design to make it simpler and intuitive.
