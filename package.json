@@ -2,10 +2,9 @@
   "name": "todonow",
   "version": "1.0.0",
   "//main_original": "node_modules/expo/AppEntry.js",
-  "main": "index.js",
-  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "//start_original": "expo start",
     "//android_original": "expo start --android",
     "//ios_original": "expo start --ios",

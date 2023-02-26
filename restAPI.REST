@@ -1,0 +1,38 @@
+POST http://localhost:9000/api/task
+Content-Type: application/json
+
+{
+    "taskName" : "Do grocery",
+    "taskDescription": "Buy milk, bread, eggs, and fruits",
+    "startDate" : "2023-05-25T12:34",
+    "endDate" : "2023-05-28T12:34"
+}
+
+###
+
+POST http://localhost:9000/api/task
+Content-Type: application/json
+
+{
+    "taskName" : "Money",
+    "taskDescription": "Buy milk, bread, eggs, and fruits",
+    "startDate" : "2023-05-25T12:34",
+    "endDate" : "2023-05-28T12:34"
+}
+
+###
+
+GET  http://localhost:9000/api/tasks
+Content-Type: application/json
+
+###
+
+PUT http://localhost:9000/api/task/Money
+Content-Type: application/json
+
+{
+    "taskName" : "Money Update",
+    "taskDescription": "Buy milk, bread, eggs, and fruits",
+    "startDate" : "2023-05-25T12:34",
+    "endDate" : "2023-05-28T12:34"
+}
