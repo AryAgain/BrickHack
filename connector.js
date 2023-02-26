@@ -68,6 +68,29 @@ function createTask(taskName, taskDescription=null, startDate=null, endDate=null
     console.log("saved to database");
 }
 
+
+// function to delete task from mongoose mongodb
+function deleteTask(task) {
+    // await tasks.deleteOne({ taskName: task }, function (err) {
+    //     if (err) return handleError(err);
+    //     // deleted at most one tank document
+    //  });
+
+// Using callbacks:
+     tasks.deleteOne({ taskName: task }, function (err) {
+            if (err)
+                console.log('error')
+            else
+                console.log("Successfully deleted")
+         });
+}
+// express server to call deleteTask function
+server.post('/deleteTask', function (req, res) {
+    console.log('getting sent data to be deleted=',req.body);
+    deleteTask(req.body.taskName);
+    res.send('{"result":"sent"}');
+});
+
 // call createTask function
 // createTask("Get milk ", "Buy organic", new Date("2023-05-25T12:34"), new Date("2023-05-29T12:34"));
 
