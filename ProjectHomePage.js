@@ -1,37 +1,34 @@
-import 'react-native-gesture-handler';
 import React, {useState,useEffect} from 'react';
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
 import TaskEnter from './TaskEnter';
 import Tasks from './Tasks';
 import { MaterialIcons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import TaskPage from './TaskPage';
-import ProjectHomePage from './ProjectHomePage';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 
-
-const Stack = createStackNavigator();
-
-export default function App() {
-
-
+export default function ProjectHomePage() {
 
   return (
-    
-  
-    <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Task"
-            component={TaskPage}
-          />
-          <Stack.Screen
-            name="Project"
-            component={ProjectHomePage}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <View style={styles.container}>
+      <Text style={styles.heading}>Project Home Page</Text>
+      {/* <View style={styles.projectcontainer}>
+        <MaterialIcons style={styles.projecticon} name="radio-button-on" size={18} color='#fff' />
+      </View>
+      <ScrollView style={styles.scrollView}>
+        {
+        tasks.map((task, index) => {
+          return (
+            <View key={index} style={styles.taskContainer}>
+              <Tasks task={task} removeTask={() => removeTask(task)}/>
+            </View>
+          );
+        })
+      }
+      </ScrollView>
+      <TaskEnter addTask={addTask}/> */}
+    </View>
   );
 }
 
