@@ -3,39 +3,20 @@ import { KeyboardAvoidingView, StyleSheet, View, TextInput, TouchableOpacity, } 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default TaskEnter = (props) => {
-    const [task, setTask] = useState();
-    const [date, setDate] = useState(new Date());
+export default ProjectEnter = (props) => {
+    const [project, setProject] = useState();
 
-    const handleAddTask = (value) => {
-        props.addTask(value);
-        setTask(null);
+    const handleAddProject = (value) => {
+        props.addProject(value);
+        setProject(null);
     }
-
-    const onChangedate = (event, selectedDate) => {
-        // setShowDate(false);
-
-        // on cancel set date value to previous date
-        if (event?.type === 'dismissed') {
-            setDate(date);
-            return;
-        }
-        console.log(selectedDate)
-        setDate(selectedDate);
-    };
 
     return (
         <KeyboardAvoidingView 
         // behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>
-        <TextInput style={styles.inputField} value={task} onChangeText={text => setTask(text)} placeholder={'Write a task'} placeholderTextColor={'#fff'}/>
-        <DateTimePicker style={styles.datetimeField}
-                    testID="dateTimePicker"
-                    value={date}
-                    mode="datetime" 
-                    is24Hour={true}
-                    onChange={onChangedate} />
-        <TouchableOpacity onPress={() => handleAddTask({"taskName":task,"datetime":date})}>
+        <TextInput style={styles.inputField} value={project} onChangeText={text => setProject(text)} placeholder={'Write a project'} placeholderTextColor={'#fff'}/>
+        <TouchableOpacity onPress={() => handleAddProject({"projectName":project})}>
           <View style={styles.button}>
               <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
           </View>

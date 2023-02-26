@@ -2,22 +2,22 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default Tasks = (props) => {
-    const [taskStatus, setTaskStatus] = useState({'pressButton': false});
+export default Projects = (props) => {
+    const [projectStatus, setProjectStatus] = useState({'pressButton': false});
 
-    const strikeoffTask = () =>{
-        setTaskStatus({'pressButton':true})
+    const strikeoffProject = () =>{
+        setProjectStatus({'pressButton':true})
     }
 
     return (  
         <View style={styles.taskContainer}>
-            <TouchableOpacity onPress={() => strikeoffTask()}>
-                {!taskStatus.pressButton && <MaterialIcons style={styles.strikeoff} name="panorama-fisheye" size={18} color='#fff' />}
-                {taskStatus.pressButton && <MaterialIcons style={styles.strikeoff} name="radio-button-on" size={18} color='#fff' />}
+            <TouchableOpacity onPress={() => strikeoffProject()}>
+                {!projectStatus.pressButton && <MaterialIcons style={styles.strikeoff} name="panorama-fisheye" size={18} color='#fff' />}
+                {projectStatus.pressButton && <MaterialIcons style={styles.strikeoff} name="radio-button-on" size={18} color='#fff' />}
             </TouchableOpacity>
-            {!taskStatus.pressButton && <Text style={styles.task}>{props.task}</Text>}
-            {taskStatus.pressButton && <Text style={styles.strikeofftask}>{props.task}</Text>}
-            <TouchableOpacity onPress={() => props.removeTask()}>
+            {!projectStatus.pressButton && <Text style={styles.project}>{props.project}</Text>}
+            {projectStatus.pressButton && <Text style={styles.strikeofftask}>{props.project}</Text>}
+            <TouchableOpacity onPress={() => props.removeProject()}>
                 <MaterialIcons style={styles.delete} name="delete" size={18} color='#fff' />
             </TouchableOpacity>
         </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     strikeoff: {
         marginLeft: 10
     },
-    task: 
+    project: 
     {
         marginLeft: 40,
         textAlign: 'center',

@@ -1,46 +1,37 @@
-import React, {useState} from 'react';
+import 'react-native-gesture-handler';
+import React, {useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
 import TaskEnter from './TaskEnter';
 import Tasks from './Tasks';
+import { MaterialIcons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import TaskPage from './TaskPage';
+import ProjectHomePage from './ProjectHomePage';
+
+
+const Stack = createStackNavigator();
 
 export default function App() {
 
-  const [tasks, setTasks] = useState([]);
 
-  const addTask = (task) => {
-    if (task == null) return;
-    // setTasks([...tasks, task]);
-    
-    fetch('http://localhost:3000/createTask', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ taskName: task })
-            }).then(response => console.log('received'));
-
-    Keyboard.dismiss();
-  }
-
-  const removeTask = (removeTaskValue) => {
-    setTasks(tasks.filter((value) => value != removeTaskValue));
-  }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>TODO NOW LIST</Text>
-      <ScrollView style={styles.scrollView}>
-        {
-        tasks.map((task, index) => {
-          return (
-            <View key={index} style={styles.taskContainer}>
-              <Tasks task={task} removeTask={() => removeTask(task)}/>
-            </View>
-          );
-        })
-      }
-      </ScrollView>
-      <TaskEnter addTask={addTask}/>
-    </View>
+    
+  
+    <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Task"
+            component={TaskPage}
+          />
+          <Stack.Screen
+            name="Project"
+            component={ProjectHomePage}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
@@ -52,11 +43,23 @@ const styles = StyleSheet.create({
   },
   heading: {
     color: '#f0f8ff',
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: '600',
-    marginTop: 50,
+    marginTop: 60,
     marginBottom: 10,
-    textAlign: 'center'
+    marginLeft: 20,
+    textAlign: 'left'
+  },
+  projectcontainer: {
+    backgroundColor: '#1E1A3C',
+    justifyContent: 'right',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    minHeight: 10,
+  },
+  projecticon: {
+    marginRight: 10,
+    marginLeft: 340
   },
   scrollView: {
     marginBottom: 70,
