@@ -5,12 +5,23 @@ var cors = require('cors');
 
 var server = express();
 
+// mongoose connect to todo database
 mongoose.connect("mongodb://localhost:27017/todo", function(err){
     if(err){
         console.log("Error connecting to database");
     }else{
         console.log("Connected to database");
     }
+
+//mongoose connect to project database
+mongoose.connect("mongodb://localhost:27017/project", function(err){
+    if(err){
+        console.log("Error connecting to database");
+    }else{
+        console.log("Connected to database");
+    }
+
+});
 
 });
 // express server to listen to port 3000
@@ -41,8 +52,18 @@ const taskSchema = new mongoose.Schema({
     updated : { type: Date, default: Date.now }     //metadata
 });
 
-// Creating collection
+// Defining project schema
+const projectSchema = new mongoose.Schema({
+    projectName: String,
+    taskName: String,
+    updated : { type: Date, default: Date.now }     //metadata
+});
+
+// Creating tasks collection
 const tasks = mongoose.model("task", taskSchema);
+
+// Creating projects collection
+const projects = mongoose.model("project", projectSchema);
 
 // const task1 = new tasks({
 //     taskName: "Do grocery",
@@ -92,7 +113,7 @@ server.post('/deleteTask', function (req, res) {
 });
 
 
-
+// function to get task
 async function getAllTasks(response) {
     const allTasks = await tasks.find({});
     // for (let i = 0; i < allTasks.length; i++) {
@@ -103,6 +124,7 @@ async function getAllTasks(response) {
     response.status(200).json(allTasks);
 }
 
+// express server to call getAllTasks function
 server.get('/api/tasks', (request, response) => {
     try{
         getAllTasks(response);
@@ -120,3 +142,58 @@ server.get('/api/tasks', (request, response) => {
 // findOneAndUpdate()
 //function updateTask(taskName, taskDescription, startDate, endDate) {
 
+// *** Projects fucntions ***
+// function to create new project
+function createProject(projectName, taskName) {
+    const project = new projects({
+        projectName: projectName,
+        taskName: taskName,
+    });
+    project.save();
+    console.log("saved to database");
+}
+
+
+// function to delete project from mongoose mongodb
+function deleteProject(project) {
+    projects.deleteOne({ projectName: project }, function (err) {
+        if (err)
+            console.log('error')
+        else
+            console.log("Successfully deleted")
+     });
+}
+
+// express server to call createProject function
+server.post('/createProject', function (req, res) {
+    console.log('getting sent data=',req.body);
+    createProject(req.body.projectName, req.body.taskName);
+    res.send('{"result":"sent"}');
+});
+
+// express server to call deleteProject function
+server.post('/deleteProject', function (req, res) {
+    console.log('getting sent data to be deleted=',req.body);
+    deleteProject(req.body.projectName);
+    res.send('{"result":"sent"}');
+}
+);
+
+// function to get project
+async function getAllProjects(response) {
+    const allProjects = await projects.find({});
+    console.log(allProjects);
+    console.log("retreived from database");
+    response.status(200).json(allProjects);
+}
+
+// express server to call getAllProjects function
+server.get('/api/projects', (request, response) => {
+    try{
+        getAllProjects(response);
+    }catch(error){
+        response.json(error);
+        console.log("ERROR");
+    }
+}
+)
