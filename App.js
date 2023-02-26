@@ -22,7 +22,14 @@ export default function App() {
   }
 
   const removeTask = (removeTaskValue) => {
-    setTasks(tasks.filter((value) => value != removeTaskValue));
+
+
+    fetch('http://localhost:3000/deleteTask', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ taskName: removeTaskValue })
+            }).then(response => setTasks(tasks.filter((value) => value != removeTaskValue)));
+
   }
 
   return (
