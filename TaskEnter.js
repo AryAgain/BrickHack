@@ -12,7 +12,7 @@ export default TaskEnter = (props) => {
 
     return (
         <KeyboardAvoidingView 
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        // behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>
         <TextInput style={styles.inputField} value={task} onChangeText={text => setTask(text)} placeholder={'Write a task'} placeholderTextColor={'#fff'}/>
         <TouchableOpacity onPress={() => handleAddTask(task)}>
