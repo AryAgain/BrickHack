@@ -35,7 +35,7 @@ export default TaskEnter = (props) => {
                     mode="datetime" 
                     is24Hour={true}
                     onChange={onChangedate} />
-        <TouchableOpacity onPress={() => handleAddTask(task)}>
+        <TouchableOpacity onPress={() => handleAddTask({"taskName":task,"datetime":date})}>
           <View style={styles.button}>
               <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
           </View>

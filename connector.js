@@ -26,7 +26,7 @@ server.listen(3000, function () {
 server.post('/createTask', function (req, res) {
     console.log('getting sent data=',req.body);
     //createTask(req.body.taskName, req.body.taskDescription, req.body.startDate, req.body.endDate);
-    createTask(req.body.taskName);
+    createTask(req.body.taskName,req.body.endDate);
         // "hi", "2023-05-25T16:34", "2023-06-25T16:34");
     res.send('{"result":"sent"}');
 });
@@ -57,7 +57,8 @@ const tasks = mongoose.model("task", taskSchema);
 // console.log("saved to database");
 
 // function to create new task
-function createTask(taskName, taskDescription=null, startDate=null, endDate=null) {
+function createTask(taskName, endDate=null, taskDescription=null, startDate=null) {
+    console.log('in createtask()=',taskName, endDate)
     const task = new tasks({
         taskName: taskName,
         taskDescription: taskDescription,
@@ -98,8 +99,8 @@ async function getAllTasks(response) {
     // for (let i = 0; i < allTasks.length; i++) {
     //     console.log(allTasks[i]);
     // }
-    console.log(allTasks);
-    console.log("retreived from database");
+    // console.log(allTasks);
+    // console.log("retreived from database");
     response.status(200).json(allTasks);
 }
 

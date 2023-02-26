@@ -9,16 +9,16 @@ export default function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  const addTask = (task) => {
-    if (task == null) return;
+  const addTask = (taskobject) => {
+    if (taskobject.taskName == null) return;
     // setTasks([...tasks, task]);
-    
+    console.log('in addtask()=',taskobject)
     // http://localhost:3000/createTask  // use  "ipconfig getifaddr en0" to find ip
     fetch('http://129.21.66.106:3000/createTask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ taskName: task })
-            }).then(response => setTasks([...tasks, task]));
+            body: JSON.stringify({ taskName: taskobject.taskName, endDate: taskobject.datetime  })
+            }).then(response => setTasks([...tasks, taskobject.taskName]));
 
     Keyboard.dismiss();
   }
