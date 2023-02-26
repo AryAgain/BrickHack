@@ -2,6 +2,7 @@ var express = require('express');
 const mongoose = require("mongoose");
 var bodyParser = require('body-parser');
 var cors = require('cors');
+const gpt3 = require('./ai_model.js');
 
 var server = express();
 
@@ -13,13 +14,13 @@ mongoose.connect("mongodb://localhost:27017/todo", function(err){
     }
 
 });
-// express server to listen to port 3000
+// express server to listen to port 3200
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use(cors());
 
-server.listen(3000, function () {
+server.listen(3200, function () {
     console.log('Server is running..');
 });
 // express server to call createTask function
@@ -121,3 +122,82 @@ server.get('/api/tasks', (request, response) => {
 // findOneAndUpdate()
 //function updateTask(taskName, taskDescription, startDate, endDate) {
 
+
+
+
+// Defining project schema
+const projectSchema = new mongoose.Schema({
+    projectName: String,
+    taskName: Array,
+    updated : { type: Date, default: Date.now }     //metadata
+});
+
+// Creating projects collection
+const projects = mongoose.model("project", projectSchema);
+
+
+
+
+// *** Projects fucntions ***
+// function to create new project
+async function createProject(projectName, noOftasks=3) {
+    // calling gpt3 function to get task string
+    taskString = await gpt3.runCompletion(noOftasks, projectName);
+    console.log('projectName in cp()=',projectName)
+    console.log('test in cp()')
+    // splitting task string into array of tasks
+    console.log(taskString);
+    taskArray = taskString.split(",");
+
+    for(let i = 0; i < taskArray.length; i++){
+        console.log("task array of i" +i + "- "+ taskArray[i]);
+        temp = taskArray[i].trim().split(":");
+        console.log("temp" +temp);
+        
+        // temp = taskArray[i].split(":");
+        // taskNames[i] = temp[1].trim();
+        createTask(temp[1]);
+        console.log(temp);
+    }
+
+    console.log("created tasks for projects and saved to database");
+
+    const project = new projects({
+        projectName: projectName,
+        taskName: taskNames,
+    });
+    project.save();
+    // console.log(taskString);
+    console.log("saved project to database");
+}
+
+
+// function to delete project from mongoose mongodb
+async function deleteProject(request, response) {
+//    await projects.deleteOne({ projectName: projectToDelete }, function (err) {
+//         if (err)
+//             console.log('error')
+//         else
+//             console.log("Successfully deleted")
+//      });
+    // var query = {projectName: request.params.name};
+
+    await projects.deleteOne(request.body);
+    // console.log(request.body);
+    console.log("delete done in project")
+}
+
+// express server to call createProject function
+server.post('/createProject', function (req, res) {
+    console.log('in here')
+    console.log('getting sent data in create p api=' + req.body.projectName);
+    createProject(req.body.projectName);
+    res.send('{"result":"sent"}');
+});
+
+// express server to call deleteProject function
+server.delete('/deleteProject', function (req, res) {
+    console.log('getting sent data to be deleted=');
+    deleteProject(req, res);
+    res.send('{"result":"sent"}');
+});

@@ -16,8 +16,8 @@ export default function TaskPage({navigation}) {
     if (taskobject.taskName == null) return;
     // setTasks([...tasks, task]);
     console.log('in addtask()=',taskobject)
-    // http://localhost:3000/createTask  // use  "ipconfig getifaddr en0" to find ip
-    fetch('http://129.21.66.106:3000/createTask', {
+    // http://localhost:3200/createTask  // use  "ipconfig getifaddr en0" to find ip
+    fetch('http://129.21.66.106:3200/createTask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ taskName: taskobject.taskName, endDate: taskobject.datetime  })
@@ -28,8 +28,8 @@ export default function TaskPage({navigation}) {
 
   const removeTask = (removeTaskValue) => {
 
-    // http://localhost:3000/deleteTask
-    fetch('http://129.21.66.106:3000/deleteTask', {
+    // http://localhost:3200/deleteTask
+    fetch('http://129.21.66.106:3200/deleteTask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ taskName: removeTaskValue })
@@ -40,8 +40,8 @@ export default function TaskPage({navigation}) {
 
   useEffect(() => {
     
-    // http://localhost:3000//api/tasks
-    fetch('http://129.21.66.106:3000/api/tasks', {
+    // http://localhost:3200//api/tasks
+    fetch('http://129.21.66.106:3200/api/tasks', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
       })

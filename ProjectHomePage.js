@@ -2,33 +2,93 @@ import React, {useState,useEffect} from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
-import TaskEnter from './TaskEnter';
-import Tasks from './Tasks';
+import ProjectEnter from './ProjectEnter';
+import Projects from './Projects';
 import { MaterialIcons } from '@expo/vector-icons';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
 
 export default function ProjectHomePage() {
 
+  const [projects, setProjects] = useState([]);
+
+  const addProject = (projectval) => {
+    if (projectval == null) return;
+    // setTasks([...tasks, task]);
+    console.log('in addtask()=',projectval)
+    // http://localhost:3200/createTask  // use  "ipconfig getifaddr en0" to find ip
+    fetch('http://129.21.66.106:3200/createProject', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(projectval)
+            }).then(response => setProjects([...projects, projectval.projectName]));
+
+    Keyboard.dismiss();
+  }
+
+  const removeProject = (removeProjectValue) => {
+
+
+    console.log('In removeProject')
+    // http://localhost:3200/deleteTask
+    fetch('http://129.21.66.106:3200/deleteProject', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ projectName: removeProjectValue })
+            }).then(response => setProjects(projects.filter((value) => value != removeProjectValue)));
+
+  }
+
+
+  // useEffect(() => {
+    
+  //   // http://localhost:3200//api/tasks
+  //   fetch('http://129.21.66.106:3200/api/projects', {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' }
+  //     })
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       //  console.log(responseJson);
+  //       //  setState({
+  //       //     data: responseJson
+  //       //  })
+  //       var temp = []
+  //       for(var i=0;i<responseJson.length;i++){
+  //           temp.push(responseJson[i].taskName)
+  //       }
+
+  //       setTasks(temp)
+
+  //     })
+  //     .catch((error) => {
+  //        console.error(error);
+  //     });
+
+  // });
+
+
   return (
+    
     <View style={styles.container}>
       <Text style={styles.heading}>Project Home Page</Text>
-      {/* <View style={styles.projectcontainer}>
-        <MaterialIcons style={styles.projecticon} name="radio-button-on" size={18} color='#fff' />
+      <View style={styles.projectcontainer}>
+        <MaterialIcons style={styles.projecticon} onPress={() => navigation.navigate('Task')} name="radio-button-on" size={18} color='#fff' />
       </View>
       <ScrollView style={styles.scrollView}>
         {
-        tasks.map((task, index) => {
+        projects.map((project, index) => {
           return (
             <View key={index} style={styles.taskContainer}>
-              <Tasks task={task} removeTask={() => removeTask(task)}/>
+              <Projects project={project} removeProject={() => removeProject(project)}/>
             </View>
           );
         })
       }
       </ScrollView>
-      <TaskEnter addTask={addTask}/> */}
+      <ProjectEnter addProject={addProject}/>
     </View>
+    
   );
 }
 
