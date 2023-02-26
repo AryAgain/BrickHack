@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
 import TaskEnter from './TaskEnter';
@@ -31,6 +31,42 @@ export default function App() {
             }).then(response => setTasks(tasks.filter((value) => value != removeTaskValue)));
 
   }
+
+  // componentDidMount=()=>{
+  
+  //   // Changing the state after 2 sec
+  //   // from the time when the component
+  //   // is rendered
+  //   setTimeout(() => {
+  //     this.setState({ color: 'wheat' });
+  //   }, 1000);
+  // }
+
+  useEffect(() => {
+    
+    fetch('http://localhost:3000/api/tasks', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        //  console.log(responseJson);
+        //  setState({
+        //     data: responseJson
+        //  })
+        var temp = []
+        for(var i=0;i<responseJson.length;i++){
+            temp.push(responseJson[i].taskName)
+        }
+
+        setTasks(temp)
+
+      })
+      .catch((error) => {
+         console.error(error);
+      });
+
+  });
 
   return (
     <View style={styles.container}>

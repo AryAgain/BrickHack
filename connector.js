@@ -91,6 +91,27 @@ server.post('/deleteTask', function (req, res) {
     res.send('{"result":"sent"}');
 });
 
+
+
+async function getAllTasks(response) {
+    const allTasks = await tasks.find({});
+    // for (let i = 0; i < allTasks.length; i++) {
+    //     console.log(allTasks[i]);
+    // }
+    console.log(allTasks);
+    console.log("retreived from database");
+    response.status(200).json(allTasks);
+}
+
+server.get('/api/tasks', (request, response) => {
+    try{
+        getAllTasks(response);
+    }catch(error){
+        response.json(error);
+        console.log("ERROR");
+    }
+})
+
 // call createTask function
 // createTask("Get milk ", "Buy organic", new Date("2023-05-25T12:34"), new Date("2023-05-29T12:34"));
 
