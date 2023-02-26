@@ -10,7 +10,14 @@ export default function App() {
 
   const addTask = (task) => {
     if (task == null) return;
-    setTasks([...tasks, task]);
+    // setTasks([...tasks, task]);
+    
+    fetch('http://localhost:3000/createTask', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ taskName: task })
+            }).then(response => response.json()).then(data => console.log('data posted') );
+
     Keyboard.dismiss();
   }
 
