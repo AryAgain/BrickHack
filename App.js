@@ -10,13 +10,15 @@ export default function App() {
 
   const addTask = (task) => {
     if (task == null) return;
-    setTasks([...tasks, task]);
+    // setTasks([...tasks, task]);
+    
+    fetch('http://localhost:3000/createTask', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ taskName: task })
+            }).then(response => response.json()).then(data => console.log('data posted') );
+
     Keyboard.dismiss();
-  }
-
-
-  const strikeoffTask = (strikeoffTaskValue) => {
-    // setTasks(tasks.filter((value) => value != strikeoffTaskValue));
   }
 
   const removeTask = (removeTaskValue) => {
@@ -31,7 +33,7 @@ export default function App() {
         tasks.map((task, index) => {
           return (
             <View key={index} style={styles.taskContainer}>
-              <Tasks task={task} strikeoffTask={() => strikeoffTask(task)} removeTask={() => removeTask(task)}/>
+              <Tasks task={task} removeTask={() => removeTask(task)}/>
             </View>
           );
         })
