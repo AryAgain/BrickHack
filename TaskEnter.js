@@ -66,8 +66,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     datetimeField:{
-        marginLeft: 80,
-        fontSize:40
+        // marginLeft: 120
+        justifyContent: 'right',
+        // ,
+        // fontSize:40
     },
     button: {
         height: 30,
