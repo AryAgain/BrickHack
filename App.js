@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Keyboard, ScrollView, StyleSheet, Text, View } from 'react-native';
 import TaskEnter from './TaskEnter';
 import Tasks from './Tasks';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function App() {
 
@@ -73,6 +74,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Good Morning</Text>
+      <View style={styles.projectcontainer}>
+        <MaterialIcons style={styles.projecticon} name="radio-button-on" size={18} color='#fff' />
+      </View>
       <ScrollView style={styles.scrollView}>
         {
         tasks.map((task, index) => {
@@ -103,6 +107,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 20,
     textAlign: 'left'
+  },
+  projectcontainer: {
+    backgroundColor: '#1E1A3C',
+    justifyContent: 'right',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    minHeight: 10,
+  },
+  projecticon: {
+    marginRight: 10,
+    marginLeft: 340
   },
   scrollView: {
     marginBottom: 70,
